@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         TEST_ENV = "Test environment variable"
-        HOME = ${env.WORKSPACE}
+        HOME = "${env.WORKSPACE}"
     }
 
     stages {
