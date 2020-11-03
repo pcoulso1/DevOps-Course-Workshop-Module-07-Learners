@@ -25,7 +25,7 @@ pipeline {
                 }
             }
             steps{
-                dotnet build
+                sh "dotnet build"
             }
         }
     }
