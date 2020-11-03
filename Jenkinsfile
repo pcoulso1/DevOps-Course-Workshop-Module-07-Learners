@@ -19,7 +19,7 @@ pipeline {
         }
     
 
-        stage('Parallel Stage') {
+        stage('Build Stages') {
             failFast true
             parallel {
                 stage('DotNet') {
