@@ -14,4 +14,18 @@ jobs:
 
     - run: dotnet build
 
-    - run: dotnet test    
+    - run: dotnet test
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14'
+
+    - run: cd DotnetTemplate.Web
+
+    - run: npm install
+
+    - run: npm run build
+
+    - run: npm t
+
+    - run: npm run lint
