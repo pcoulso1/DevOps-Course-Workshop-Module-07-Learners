@@ -25,7 +25,10 @@ pipeline {
                 }
             }
             steps{
-                sh "dotnet build"
+                sh """
+                export HOME=${env.WORKSPACE}
+                dotnet build
+                """
             }
         }
     }
