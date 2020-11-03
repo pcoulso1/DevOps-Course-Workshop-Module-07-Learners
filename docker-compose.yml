@@ -1,4 +1,4 @@
-version: '3.4'
+version: '2'
 
 services:
     jenkins-docker:
@@ -34,3 +34,7 @@ services:
         
 networks:
     jenkins:
+
+volumes:
+    jenkins-docker-certs:
+    jenkins-data:
