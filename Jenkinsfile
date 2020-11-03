@@ -16,5 +16,17 @@ pipeline {
                 checkout scm
             }
         }
+
+        stage('DotNet Build') {
+            agent {
+                docker {
+                    image mcr.microsoft.com/dotnet/core/sdk:3.1
+                    reuseNode true
+                }
+            }
+            steps{
+                dotnet build
+            }
+        }
     }
 }
