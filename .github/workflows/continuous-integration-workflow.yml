@@ -12,18 +12,28 @@ jobs:
       with:
         dotnet-version: '3.1.403' # SDK Version to use; x will use the latest version of the 3.1 channel
 
-    - run: dotnet build
+    - name: dotnet build 
+      run: dotnet build
 
-    - run: dotnet test
+    - name: dotnet build
+      run: dotnet test
 
     - uses: actions/setup-node@v1
       with:
         node-version: '14'
 
-    - run: cd DotnetTemplate.Web && npm install
+    - name: dotnet build
+      run: npm install
+      working-directory: DotnetTemplate.Web
 
-    - run: cd DotnetTemplate.Web && npm run build
+    - name: Run npm run build
+      run: npm run build
+      working-directory: DotnetTemplate.Web
 
-    - run: cd DotnetTemplate.Web && npm run lint
+    - name: Run npm run lint
+      run: npm run lint
+      working-directory: DotnetTemplate.Web
 
-    - run: cd DotnetTemplate.Web && npm t
+    - name: Run npm t
+      run: npm t
+      working-directory: DotnetTemplate.Web
