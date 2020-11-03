@@ -16,44 +16,46 @@ pipeline {
                 checkout scm
             }
         }
+    
 
-    stage('Parallel Stage') {
-        failFast true
-        parallel {
-            stage('DotNet Build') {
-                agent {
-                    docker {
-                        image "mcr.microsoft.com/dotnet/core/sdk:3.1"
-                        reuseNode true
+        stage('Parallel Stage') {
+            failFast true
+            parallel {
+                stage('DotNet Build') {
+                    agent {
+                        docker {
+                            image "mcr.microsoft.com/dotnet/core/sdk:3.1"
+                            reuseNode true
+                        }
+                    }
+                    steps{
+                        sh """
+                        set -ex
+                        export HOME=${env.WORKSPACE}
+                        dotnet build
+                        dotnet test
+                        """
                     }
                 }
-                steps{
-                    sh """
-                    set -ex
-                    export HOME=${env.WORKSPACE}
-                    dotnet build
-                    dotnet test
-                    """
-                }
-            }
 
-            stage('Node Build') {
-                agent {
-                    docker {
-                        image "node:14-alpine"
-                        reuseNode true
+                stage('Node Build') {
+                    agent {
+                        docker {
+                            image "node:14-alpine"
+                            reuseNode true
+                        }
                     }
-                }
-                steps{
-                    sh """
-                    set -ex
-                    export HOME=${env.WORKSPACE}
-                    cd DotnetTemplate.Web
-                    npm install
-                    npm run build
-                    npm run lint
-                    npm t
-                    """
+                    steps{
+                        sh """
+                        set -ex
+                        export HOME=${env.WORKSPACE}
+                        cd DotnetTemplate.Web
+                        npm install
+                        npm run build
+                        npm run lint
+                        npm t
+                        """
+                    }
                 }
             }
         }
