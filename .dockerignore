@@ -1,0 +1,7 @@
+# Ignore files from the docker context
+.gitignore
+.github
+.vscode
+docker
+docker-compose.yml
+jenkinsfile
