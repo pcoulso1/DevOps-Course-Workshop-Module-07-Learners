@@ -1,8 +1,16 @@
+################## 
+# Base stage
 FROM mcr.microsoft.com/dotnet/sdk:3.1-alpine as base
 
 COPY . .
 
 RUN dotnet build
+
+WORKDIR /DotnetTemplate.Web
+
+RUN apk add --update npm && \
+	npm install && \
+    npm run build
 
 ################## 
 # Testing stage
@@ -13,8 +21,6 @@ RUN dotnet test
 ################## 
 # Production stage
 FROM base as production
-
-WORKDIR /DotnetTemplate.Web
 
 # Setup the entry point
 ENTRYPOINT ["dotnet", "run" ]
