@@ -68,7 +68,12 @@ jobs:
             pcoulso1/dotnettemplate:latest
             pcoulso1/dotnettemplate:${{ env.COMMIT_HASH }}
             
-            
+    - uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: dotnet-template-web
+        heroku_email: pcoulson@btinternet.com
+        usedocker: true          
             
             
             
