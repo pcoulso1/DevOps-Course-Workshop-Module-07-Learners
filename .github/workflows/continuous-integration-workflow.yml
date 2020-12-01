@@ -65,4 +65,4 @@ jobs:
         push: true
         tags: |
             pcoulso1/dotnettemplate:latest
-            pcoulso1/dotnettemplate:${{ env.GITHUB_SHA }}
+            pcoulso1/dotnettemplate:${GITHUB_SHA::8}
